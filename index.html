@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>CodeMaster Academy - Learn Coding</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      margin: 0;
+      padding: 0;
+      background: url('coding-background.jpg') no-repeat center center fixed;
+      background-size: cover;
+      color: white;
+    }
+    header {
+      background: rgba(0, 0, 0, 0.6);
+      padding: 20px;
+    }
+    nav {
+      background: rgba(0, 0, 0, 0.7);
+      padding: 10px;
+    }
+    nav a {
+      color: white;
+      margin: 0 15px;
+      text-decoration: none;
+      font-weight: bold;
+    }
+    button {
+      padding: 10px 20px;
+      background: orange;
+      color: white;
+      border: none;
+      cursor: pointer;
+      margin-top: 20px;
+      font-size: 16px;
+    }
+    button:hover {
+      background: #ff6600;
+    }
+    #signupForm, #followStep, #videoSection {
+      display: none;
+      margin-top: 20px;
+      background: rgba(0, 0, 0, 0.5);
+      padding: 20px;
+      border-radius: 10px;
+      width: 60%;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    input {
+      display: block;
+      margin: 10px auto;
+      padding: 8px;
+      width: 250px;
+      border-radius: 5px;
+      border: none;
+    }
+    .error {
+      color: red;
+      font-size: 14px;
+    }
+    iframe {
+      margin-top: 20px;
+      width: 560px;
+      height: 315px;
+      border-radius: 10px;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Welcome to CodeMaster Academy</h1>
+    <p>Learn HTML, CSS & JavaScript with amazing videos</p>
+  </header>
+
+  <nav>
+    <a href="#">Home</a>
+    <a href="#">Registration</a>
+    <a href="#">Courses</a>
+    <a href="#">Contact</a>
+  </nav>
+
+  <button onclick="showForm()">Start Learning</button>
+
+  <div id="signupForm">
+    <h2>Registration Form</h2>
+    <input type="text" id="username" placeholder="Username">
+    <span id="userError" class="error"></span>
+    <input type="email" id="email" placeholder="Email">
+    <span id="emailError" class="error"></span>
+    <input type="tel" id="mobile" placeholder="Mobile Number">
+    <span id="mobileError" class="error"></span>
+    <input type="password" id="password" placeholder="Password">
+    <span id="passError" class="error"></span>
+    <button onclick="validateForm()">Submit</button>
+  </div>
+
+  <div id="followStep">
+    <h2>Follow Me on Instagram</h2>
+    <p>Follow my ID <strong>@dhirajkumar836080</strong> to unlock courses!</p>
+    <button onclick="openInstagram()">Follow Now</button>
+  </div>
+
+  <div id="videoSection">
+    <h2>Courses</h2>
+    <h3>Learn HTML</h3>
+    <iframe src="https://www.youtube.com/embed/mJgBOIoGihA" allowfullscreen></iframe>
+
+    <h3>Learn CSS</h3>
+    <iframe src="https://www.youtube.com/embed/1Rs2ND1ryYc" allowfullscreen></iframe>
+
+    <h3>Learn JavaScript</h3>
+    <iframe src="https://www.youtube.com/embed/PkZNo7MFNFg" allowfullscreen></iframe>
+  </div>
+
+  <script>
+    function showForm() {
+      document.getElementById("signupForm").style.display = "block";
+    }
+
+    function validateForm() {
+      let valid = true;
+
+      // Username: only letters allowed
+      let username = document.getElementById("username").value;
+      if (!/^[A-Za-z]+$/.test(username)) {
+        document.getElementById("userError").innerText = "Username me sirf alphabets hone chahiye!";
+        valid = false;
+      } else {
+        document.getElementById("userError").innerText = "";
+      }
+
+      // Email: must be valid format
+      let email = document.getElementById("email").value;
+      if (!/^[^ ]+@[^ ]+\.[a-z]{2,3}$/.test(email)) {
+        document.getElementById("emailError").innerText = "Valid email address dalna zaroori hai!";
+        valid = false;
+      } else {
+        document.getElementById("emailError").innerText = "";
+      }
+
+      // Mobile: only digits, 10 digits
+      let mobile = document.getElementById("mobile").value;
+      if (!/^[0-9]{10}$/.test(mobile)) {
+        document.getElementById("mobileError").innerText = "Mobile number 10 digits ka hona chahiye!";
+        valid = false;
+      } else {
+        document.getElementById("mobileError").innerText = "";
+      }
+
+      // Password: minimum 6 chars
+      let password = document.getElementById("password").value;
+      if (password.length < 6) {
+        document.getElementById("passError").innerText = "Password kam se kam 6 characters ka hona chahiye!";
+        valid = false;
+      } else {
+        document.getElementById("passError").innerText = "";
+      }
+
+      if (valid) {
+        document.getElementById("signupForm").style.display = "none";
+        document.getElementById("followStep").style.display = "block";
+      }
+    }
+
+    function openInstagram() {
+      // Insta page open hoga
+      let instaWindow = window.open("https://www.instagram.com/dhirajkumar836080", "_blank");
+
+      // 5 second ke baad video section unlock hoga
+      setTimeout(function() {
+        document.getElementById("followStep").style.display = "none";
+        document.getElementById("videoSection").style.display = "block";
+        if (instaWindow) {
+          instaWindow.close(); // Insta tab close ho jaayega
+        }
+      }, 5000);
+    }
+  </script>
+</body>
+</html>
